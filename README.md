@@ -2,4 +2,4 @@
 
 > Status do projeto: Em desenvolvimento
 
-``` Bora ```
+``` Javascript code ```
