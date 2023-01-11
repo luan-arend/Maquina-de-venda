@@ -69,13 +69,7 @@ function executar(){
         opcao = exibirMenu()
     switch (opcao) {
         case "1":
-        let pergunta1 = parseFloat ( prompt ("\nInsira uma das moedas válidas abaixo:" + "\nR$0.01, R$0.05, R$0.10, R$0.50, R$1.00"))
-            if (verificaMoedas(pergunta1)){
-                saldo += pergunta1
-                
-            } else{
-                alert("Moeda inválida, tente novamente.")
-            }
+
         break
         case "2":
             
@@ -93,13 +87,12 @@ function verificaMoedas(value) {
     return false }
 }
 
-// problemas na execução
-function verificaProdutos(product) {
-    let index = products.findIndex(val == val.name == product)
-        if (index >= 0) {
-            return true
+function adicionarMoedas(value) {
+    let moeda1 = parseFloat ( prompt ("\nInsira uma das moedas válidas abaixo:" + "\nR$0.01, R$0.05, R$0.10, R$0.25, R$0.50, R$1.00"))
+        if (verificaMoedas(moeda1)){
+            saldo += moeda1
+            alert(`Você inseriu a moeda: R$ ${moeda1}`)
         } else {
-    return false }
+            alert("Moeda inválida, tente novamente.")
+            }
 }
-
-executar()
