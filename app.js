@@ -8,13 +8,13 @@ let coins = [
 ]
 
 let products = [
-    {name: "coca-cola", price: 1.50, stock: 10},
-    {name: "agua", price: 1.00, stock: 10},
+    {name: "Coca-Cola", price: 1.50, stock: 10},
+    {name: "Água", price: 1.00, stock: 10},
     {name: "pastelina", price: 0.30, stock: 10}
 ]
 
-let saldo = 0
-saldo = parseFloat(saldo)
+let saldo = 0.00
+saldo = parseFloat(saldo.toFixed(2))
 let listaDeProdutos = []
 
 function exibirMenu(){
@@ -24,7 +24,8 @@ function exibirMenu(){
         "\nEscolha uma opção abaixo:\n" +
         "\n1. Inserir moedas" + 
         "\n2. Escolher produtos" +
-        "\n3. Voltar"
+        "\n3. Receber troco" +
+        "\n4. Finalizar"
     )
 }
 
@@ -34,12 +35,19 @@ function executar(){
         opcao = exibirMenu()
     switch (opcao) {
         case "1":
-
+            adicionarMoedas()
         break
         case "2":
-            
+            comprarProdutos()
+        break
+        case "3":
+            calcularTroco(saldo)
+            alert("Seu troco é ")
+        break
+        default:
+            alert("Opção Inválida, digite uma das opções mencionadas")
         }
-    } while (opcao !== "3") {
+    } while (opcao !== "4") {
         alert("Finalizando...")
     }
 }
@@ -52,17 +60,58 @@ function verificarMoedas(value) {
     return false }
 }
 
-function adicionarMoedas(value) {
-    let moeda1 = parseFloat ( prompt ("\nInsira uma das moedas válidas abaixo:" + "\nR$0.01, R$0.05, R$0.10, R$0.25, R$0.50, R$1.00"))
+function adicionarMoedas(){
+    let moeda1 = parseFloat (prompt ("Insira uma das moedas válidas abaixo:" + "\nR$0.01, R$0.05, R$0.10, R$0.25, R$0.50, R$1.00"))
         if (verificarMoedas(moeda1)){
             saldo += moeda1
             alert(`Você inseriu a moeda: R$ ${moeda1}`)
-            return alert()
         } else {
             alert("Moeda inválida, tente novamente.")
             }
 }
 
-function atualizarStockMoedas(){
-    
+function comprarProdutos(){
+    let produtosComprados = prompt("Escolha um dos produtos disponíveis abaixo:" +
+        "\nCoca-Cola - R$ 1.50" +
+        "\nÁgua - R$ 1.00" +
+        "\nPastelina - R$ 0.30"
+        )
+
+        if (produtosComprados === "coca-cola" && "Coca-Cola" && "Coca-cola"){
+            saldo -= products[0].price
+            alert(`Obrigado pela compra da ${produtosComprados}.`)
+        }
+        else if (produtosComprados === "agua" && "água" && "Agua" && "Água"){
+            saldo -= products[1].price
+            alert(`Obrigado pela compra da ${produtosComprados}.`)
+        }
+        else if (produtosComprados === "pastelina" && "Pastelina"){
+            saldo -= products[2].price
+            alert(`Obrigado pela compra da ${produtosComprados}.`)
+        }
+        else if (saldo >= 0.00){
+            alert("Saldo insuficiente, insira mais moedas")
+        }
+        else {
+            alert("Produto inválido, tente novamente/Entrada inválida")
+        } 
 }
+
+let notas = [1, 0.50, 0.25, 0.10, 0.05, 0.01]
+let troco = ""
+function calcularTroco(){
+    arr = new Array();	
+ 	
+   for (x in notas) {
+       if (notas[x] > troco) continue;
+       
+       let quantidadeCedula = parseInt(troco / notas[x]);
+       arr.push([quantidadeCedula, notas[x]]);
+       
+       troco = troco - (quantidadeCedula * notas[x]);
+   }
+   
+   return arr;
+}
+
+executar()
